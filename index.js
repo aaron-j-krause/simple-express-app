@@ -15,7 +15,7 @@ var userRoute = require('./lib/routes/userRoutes');
 var postRoute = require('./lib/routes/postRoutes');
 
 app.use('/user', userRoute);
-app.use('/user', postRoute)
+app.use('/posts', postRoute)
 
 //db
 mongoose.connect('mongodb://localhost/db');
