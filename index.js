@@ -15,22 +15,13 @@ var userRoute = require('./lib/routes/userRoutes');
 var postRoute = require('./lib/routes/postRoutes');
 
 app.use('/user', userRoute);
-app.use('/posts', postRoute)
+app.use('/posts', postRoute);
 
 //db
 mongoose.connect('mongodb://localhost/db');
-var db = mongoose.connection;
-db.on('error', function(err){
-  console.log('error connecting');
-});
-db.once('connected', function(){
-  console.log('connected');
-});
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
   res.send('fuuuck yeah');
 });
 
-app.post('/:user/newpost')
-  var server = app.listen(3000, function(){
-})
+var server = app.listen(3000);
