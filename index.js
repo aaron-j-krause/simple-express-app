@@ -2,7 +2,7 @@ var express = require('express');
 var mongo = require('mongo');
 var mongoose = require('mongoose');
 var app = express();
-var passport = require('passport')
+var passport = require('passport');
 
 var assignUserRoutes = require('./lib/routes/userRoutes');
 var assignPostRoutes = require('./lib/routes/postRoutes');
@@ -17,7 +17,6 @@ app.set('appSecret', process.env.SECRET || 'chaaaaaange');
 app.use(passport.initialize());
 assignPassportStrat(passport);
 
-
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
@@ -25,7 +24,7 @@ app.use(bodyParser.json());
 var userRouter = express.Router();
 var postRouter = express.Router();
 
-assignPostRoutes(postRouter);
+assignPostRoutes(postRouter, app.get('appSecret'));
 assignUserRoutes(userRouter, passport, app.get('appSecret'));
 
 app.use('/user', userRouter);
@@ -34,10 +33,6 @@ app.use('/posts', postRouter);
 //db
 mongoose.connect('mongodb://localhost/db');
 
-app.get('/', function(req, res) {
-  res.send(JSON.stringify("fuuuuck yeah"));
-});
-
-var server = app.listen((process.env.PORT || 3000), function(port){
-  console.log('listening on ' + (process.env.PORT || 3000))
+var server = app.listen((process.env.PORT || 3000), function(port) {
+  console.log('listening on ' + (process.env.PORT || 3000));
 });
