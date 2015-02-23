@@ -30,8 +30,11 @@ assignUserRoutes(userRouter, passport, app.get('appSecret'));
 app.use('/user', userRouter);
 app.use('/posts', postRouter);
 
+app.get('/', function(req, res){
+  res.send('whoooooa');
+})
 //db
-mongoose.connect('mongodb://localhost/db');
+var db = mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/dev_db');
 
 var server = app.listen((process.env.PORT || 3000), function(port) {
   console.log('listening on ' + (process.env.PORT || 3000));
